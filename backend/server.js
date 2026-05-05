@@ -16,7 +16,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
-connectDB();
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 app.use("/api/v1", auth);
 app.use("/api/v2", post);
